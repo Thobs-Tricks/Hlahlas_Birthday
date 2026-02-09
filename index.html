@@ -34,119 +34,108 @@
             padding: 0 20px;
         }
         
-        /* Header */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
+        /* Main Generator Page (Host View) */
+        .main-generator {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
             padding: 20px;
-            position: relative;
         }
         
-        .hero-content {
-            animation: fadeIn 1.5s ease-out;
+        .header-section {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease-out;
         }
         
-        .hero h1 {
-            font-size: 4.5rem;
+        .header-section h1 {
+            font-size: 3.5rem;
             margin-bottom: 10px;
             font-weight: 300;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
         
-        .hero h1 span {
+        .header-section h1 span {
             color: var(--accent);
             font-weight: 600;
         }
         
-        .hero p {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
+        .header-section p {
+            font-size: 1.5rem;
             color: var(--accent);
-            letter-spacing: 1px;
+            margin-bottom: 20px;
         }
         
-        .date-display {
-            background-color: rgba(0, 0, 0, 0.7);
-            border-left: 4px solid var(--accent);
-            padding: 20px;
-            margin: 30px 0;
-            max-width: 600px;
-        }
-        
-        .date-display h2 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-        
-        .date-display p {
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 5px;
-        }
-        
-        /* Invite Generator */
+        /* Invite Generator Section */
         .invite-generator {
             background-color: var(--light-bg);
-            padding: 50px 20px;
-            text-align: center;
-            border-top: 1px solid #333;
+            padding: 50px 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.5s ease-out;
         }
         
         .invite-generator h2 {
             font-size: 2.5rem;
             margin-bottom: 20px;
             color: var(--accent);
+            text-align: center;
         }
         
-        .generator-box {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 700px;
-            margin: 0 auto;
+        .generator-instructions {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-gray);
+            line-height: 1.8;
         }
         
         .input-group {
             display: flex;
             flex-direction: column;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .input-group label {
             text-align: left;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: var(--accent);
         }
         
         .input-group input {
-            padding: 15px;
+            padding: 18px;
             border: 1px solid #444;
             background-color: #222;
             color: var(--text-light);
-            border-radius: 5px;
-            font-size: 1.1rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent);
         }
         
         .btn {
             display: inline-block;
             background-color: var(--accent);
             color: var(--primary);
-            padding: 15px 40px;
+            padding: 18px 45px;
             border: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
+            border-radius: 8px;
+            font-size: 1.3rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             margin-top: 10px;
+            width: 100%;
+            text-align: center;
         }
         
         .btn:hover {
@@ -155,27 +144,112 @@
             box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
         
-        .generated-link {
-            margin-top: 25px;
-            padding: 15px;
+        .generated-link-container {
+            margin-top: 40px;
+            padding: 25px;
             background-color: #000;
-            border-radius: 5px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
             display: none;
         }
         
-        .generated-link.active {
+        .generated-link-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .generated-link-container h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .link-display {
+            background-color: #111;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            word-break: break-all;
+            font-size: 1.1rem;
+            border: 1px solid #333;
+        }
+        
+        .link-display a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .link-display a:hover {
+            text-decoration: underline;
+        }
+        
+        .copy-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #444;
+        }
+        
+        /* Guest Invitation Page (Hidden by default) */
+        .guest-invitation-page {
+            display: none;
+            min-height: 100vh;
+        }
+        
+        .guest-invitation-page.active {
             display: block;
         }
         
-        .generated-link a {
-            color: var(--accent);
-            word-break: break-all;
-            font-size: 1.1rem;
+        /* Hero Section for Guest Page */
+        .invitation-hero {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 20px 40px;
+            text-align: center;
         }
         
-        /* Event Details */
-        .event-details {
-            padding: 80px 20px;
+        .invitation-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+        
+        .invitation-hero h1 span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .invitation-hero p {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--accent);
+        }
+        
+        .guest-greeting {
+            font-size: 2.2rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        /* Event Details for Guest Page */
+        .event-details-guest {
+            padding: 60px 20px;
+            background-color: var(--light-bg);
         }
         
         .section-title {
@@ -199,21 +273,23 @@
         
         .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
         
         .detail-card {
-            background-color: var(--light-bg);
+            background-color: #000;
             padding: 30px;
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s ease;
+            border: 1px solid #333;
         }
         
         .detail-card:hover {
             transform: translateY(-10px);
+            border-color: var(--accent);
         }
         
         .detail-card i {
@@ -225,51 +301,35 @@
         .detail-card h3 {
             font-size: 1.8rem;
             margin-bottom: 15px;
+            color: var(--accent);
         }
         
         .detail-card p {
             color: var(--text-gray);
             font-size: 1.2rem;
+            line-height: 1.7;
         }
         
-        /* Personalized Invite Section */
-        .personalized-invite {
-            background-color: #000;
+        /* RSVP Section for Guest Page */
+        .rsvp-section {
             padding: 80px 20px;
-            text-align: center;
-            display: none;
+            background-color: #000;
         }
         
-        .personalized-invite.active {
-            display: block;
-        }
-        
-        .guest-name {
-            font-size: 3.5rem;
-            color: var(--accent);
-            margin-bottom: 30px;
-            text-transform: capitalize;
-        }
-        
-        .welcome-message {
-            font-size: 1.5rem;
+        .rsvp-container {
             max-width: 800px;
-            margin: 0 auto 50px;
-            line-height: 1.8;
-        }
-        
-        .rsvp-form {
-            max-width: 600px;
             margin: 0 auto;
             background-color: var(--light-bg);
-            padding: 40px;
-            border-radius: 10px;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         
-        .rsvp-form h3 {
-            font-size: 2rem;
+        .rsvp-container h2 {
+            font-size: 2.5rem;
             margin-bottom: 30px;
             color: var(--accent);
+            text-align: center;
         }
         
         .form-group {
@@ -279,39 +339,85 @@
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: var(--accent);
         }
         
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             border: 1px solid #444;
             background-color: #222;
             color: var(--text-light);
-            border-radius: 5px;
-            font-size: 1.1rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
         }
         
         .form-group textarea {
-            min-height: 120px;
+            min-height: 140px;
             resize: vertical;
         }
         
         .rsvp-options {
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
             margin-top: 10px;
         }
         
         .rsvp-option {
             display: flex;
             align-items: center;
+            flex: 1;
+            min-width: 200px;
         }
         
         .rsvp-option input {
             width: auto;
-            margin-right: 10px;
+            margin-right: 15px;
+            transform: scale(1.3);
+        }
+        
+        .rsvp-option label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+        
+        /* Confirmation Message */
+        .confirmation-message {
+            text-align: center;
+            padding: 50px;
+            display: none;
+        }
+        
+        .confirmation-message.active {
+            display: block;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .confirmation-message i {
+            font-size: 5rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+        }
+        
+        .confirmation-message h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .confirmation-message p {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            line-height: 1.8;
         }
         
         /* Footer */
@@ -335,6 +441,12 @@
         .contact-info p {
             font-size: 1.2rem;
             margin-bottom: 10px;
+        }
+        
+        .contact-info i {
+            color: var(--accent);
+            margin-right: 10px;
+            width: 20px;
         }
         
         .copyright {
@@ -361,15 +473,23 @@
         
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3rem;
+            .header-section h1 {
+                font-size: 2.5rem;
             }
             
-            .hero p {
-                font-size: 1.5rem;
+            .header-section p {
+                font-size: 1.3rem;
             }
             
-            .date-display h2 {
+            .invite-generator h2 {
+                font-size: 2rem;
+            }
+            
+            .invitation-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .guest-greeting {
                 font-size: 1.8rem;
             }
             
@@ -381,175 +501,217 @@
                 grid-template-columns: 1fr;
             }
             
-            .guest-name {
-                font-size: 2.5rem;
+            .rsvp-container {
+                padding: 30px 20px;
             }
             
             .rsvp-options {
                 flex-direction: column;
-                align-items: flex-start;
+                gap: 10px;
             }
             
             .rsvp-option {
-                margin-bottom: 10px;
+                min-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Main Landing Page -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Bohlale's <span>21st</span> Birthday</h1>
-            <p>An Elegant Black Affair</p>
-            
-            <div class="date-display">
-                <h2>Celebrating a Milestone</h2>
-                <p><i class="fas fa-calendar-alt"></i> Date: 26 December 2026</p>
-                <p><i class="fas fa-clock"></i> Time: 20:00</p>
-                <p><i class="fas fa-map-marker-alt"></i> Venue: Mafefe Ngwaname Mamokutu</p>
-                <p><i class="fas fa-tshirt"></i> Dress Code: Black (Elegant Attire)</p>
+    <!-- Main Generator Page (For Host) -->
+    <section class="main-generator" id="main-generator">
+        <div class="container">
+            <div class="header-section">
+                <h1>Bohlale's <span>21st</span> Birthday</h1>
+                <p>Create Personalized Invitations</p>
             </div>
             
-            <a href="#invite-generator" class="btn pulse">Create Your Personal Invitation</a>
-        </div>
-    </section>
-    
-    <!-- Invite Generator Section -->
-    <section class="invite-generator" id="invite-generator">
-        <div class="container">
-            <h2>Personalize Your Invitation</h2>
-            <div class="generator-box">
-                <p style="margin-bottom: 25px; font-size: 1.2rem;">Enter your name to generate a personalized invitation link that you can share with your guests. Each guest will receive a customized experience.</p>
+            <div class="invite-generator">
+                <h2>Invitation Link Generator</h2>
+                
+                <div class="generator-instructions">
+                    <p>Welcome! As the host, you can create personalized invitation links for each guest.</p>
+                    <p>Enter a guest's name below to generate a unique link. When the guest clicks their link, they'll see the birthday details and can RSVP directly.</p>
+                </div>
                 
                 <div class="input-group">
                     <label for="guest-name">Enter Guest's Full Name:</label>
-                    <input type="text" id="guest-name" placeholder="e.g. John Smith">
+                    <input type="text" id="guest-name" placeholder="e.g. Thabo Mokoena" autofocus>
                 </div>
                 
-                <button class="btn" id="generate-btn">Generate Personal Invite Link</button>
+                <button class="btn pulse" id="generate-btn">
+                    <i class="fas fa-link"></i> Generate Personal Invite Link
+                </button>
                 
-                <div class="generated-link" id="generated-link">
-                    <p>Your personalized invitation link is ready:</p>
-                    <a id="invite-link" href="#" target="_blank">Click to view personalized invitation</a>
-                    <p style="margin-top: 15px; font-size: 1rem;">Copy and share this link with your guest. When they click it, they'll see a personalized invitation.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Event Details Section -->
-    <section class="event-details">
-        <div class="container">
-            <h2 class="section-title">Event Details</h2>
-            
-            <div class="details-grid">
-                <div class="detail-card">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <h3>Venue</h3>
-                    <p>Mafefe Ngwaname Mamokutu<br>Beautiful scenic location perfect for a milestone celebration</p>
-                </div>
-                
-                <div class="detail-card">
-                    <i class="fas fa-clock"></i>
-                    <h3>Time & Date</h3>
-                    <p>Saturday, 26 December 2026<br>Starting at 20:00<br>Celebrating into the night</p>
-                </div>
-                
-                <div class="detail-card">
-                    <i class="fas fa-tshirt"></i>
-                    <h3>Dress Code</h3>
-                    <p>Black Elegant Attire<br>Formal black outfit required<br>Gold accessories encouraged</p>
-                </div>
-                
-                <div class="detail-card">
-                    <i class="fas fa-gift"></i>
-                    <h3>Celebration</h3>
-                    <p>Dinner, drinks, music & dancing<br>Special performances<br>Memorable experiences</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Personalized Invite Section (Hidden by default) -->
-    <section class="personalized-invite" id="personalized-invite">
-        <div class="container">
-            <h1 class="guest-name" id="display-guest-name">Guest Name</h1>
-            
-            <div class="welcome-message">
-                <p>You are cordially invited to celebrate a significant milestone - Bohlale's 21st Birthday! This elegant black affair promises an evening of sophistication, celebration, and unforgettable memories.</p>
-                <p style="margin-top: 20px;">Your presence would make this celebration even more special. Please RSVP using the form below.</p>
-            </div>
-            
-            <div class="rsvp-form" id="rsvp-form">
-                <h3>RSVP for Bohlale's 21st Birthday</h3>
-                
-                <div class="form-group">
-                    <label for="rsvp-name">Full Name *</label>
-                    <input type="text" id="rsvp-name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="rsvp-phone">Phone Number *</label>
-                    <input type="tel" id="rsvp-phone" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="rsvp-email">Email Address</label>
-                    <input type="email" id="rsvp-email">
-                </div>
-                
-                <div class="form-group">
-                    <label for="rsvp-guests">Number of Guests *</label>
-                    <select id="rsvp-guests" required>
-                        <option value="1">1 person (just me)</option>
-                        <option value="2">2 people</option>
-                        <option value="3">3 people</option>
-                        <option value="4">4 people</option>
-                        <option value="5">5+ people</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>Will you attend? *</label>
-                    <div class="rsvp-options">
-                        <div class="rsvp-option">
-                            <input type="radio" id="attend-yes" name="attendance" value="yes" required>
-                            <label for="attend-yes">Yes, I'll be there!</label>
-                        </div>
-                        <div class="rsvp-option">
-                            <input type="radio" id="attend-no" name="attendance" value="no">
-                            <label for="attend-no">Sorry, I can't make it</label>
-                        </div>
+                <div class="generated-link-container" id="generated-link-container">
+                    <h3>Personalized Invitation Link Created!</h3>
+                    <p>Share this link with your guest. When they click it, they'll see:</p>
+                    <ul style="margin: 15px 0 20px 20px; font-size: 1.1rem;">
+                        <li>A personalized greeting with their name</li>
+                        <li>All birthday celebration details</li>
+                        <li>An RSVP form to confirm attendance</li>
+                    </ul>
+                    
+                    <div class="link-display">
+                        <a id="invite-link" href="#" target="_blank">Click to preview invitation</a>
+                    </div>
+                    
+                    <button class="copy-btn" id="copy-btn">
+                        <i class="fas fa-copy"></i> Copy Link to Clipboard
+                    </button>
+                    
+                    <div style="margin-top: 25px; padding: 15px; background-color: rgba(212, 175, 55, 0.1); border-radius: 5px;">
+                        <p style="color: var(--accent); font-weight: bold; margin-bottom: 10px;">Host Contact Details for RSVP:</p>
+                        <p><i class="fas fa-user"></i> Brendah: 072 290 1011</p>
+                        <p><i class="fas fa-user"></i> Bohlale: 082 828 8033</p>
                     </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="rsvp-message">Message to Bohlale (Optional)</label>
-                    <textarea id="rsvp-message" placeholder="Wishing you a wonderful celebration..."></textarea>
-                </div>
-                
-                <button class="btn" id="submit-rsvp">Submit RSVP</button>
             </div>
         </div>
     </section>
     
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="contact-info">
-                <h3>Contact for RSVP & Inquiries</h3>
-                <p><i class="fas fa-phone"></i> Brendah: 072 290 1011</p>
-                <p><i class="fas fa-phone"></i> Bohlale: 082 828 8033</p>
-                <p><i class="fas fa-envelope"></i> Email: bohlale21@celebration.co.za</p>
-            </div>
+    <!-- Guest Invitation Page (Shown when guest clicks personalized link) -->
+    <section class="guest-invitation-page" id="guest-invitation-page">
+        <!-- Hero Section -->
+        <div class="invitation-hero">
+            <h1>Bohlale's <span>21st</span> Birthday</h1>
+            <p>An Elegant Black Affair</p>
             
-            <div class="copyright">
-                <p>© 2026 Bohlale's 21st Birthday Celebration. All rights reserved.</p>
-                <p>Designed with love for this special milestone.</p>
+            <div class="guest-greeting" id="guest-greeting">
+                You're Invited, <span id="guest-name-display">Guest</span>!
             </div>
         </div>
-    </footer>
+        
+        <!-- Event Details -->
+        <section class="event-details-guest">
+            <div class="container">
+                <h2 class="section-title">Celebration Details</h2>
+                
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Date & Time</h3>
+                        <p><strong>26 December 2026</strong><br>
+                           <strong>20:00</strong> (8:00 PM)<br>
+                           Saturday Evening Celebration</p>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Venue</h3>
+                        <p><strong>Mafefe Ngwaname Mamokutu</strong><br>
+                           Beautiful scenic location<br>
+                           Perfect for a milestone celebration</p>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <i class="fas fa-tshirt"></i>
+                        <h3>Dress Code</h3>
+                        <p><strong>Black Elegant Attire</strong><br>
+                           Formal black outfit required<br>
+                           Gold accessories encouraged<br>
+                           Dress to impress!</p>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <i class="fas fa-glass-cheers"></i>
+                        <h3>Celebration</h3>
+                        <p>Dinner & Drinks<br>
+                           Live Music & Dancing<br>
+                           Special Performances<br>
+                           Memorable Experiences</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- RSVP Section -->
+        <section class="rsvp-section">
+            <div class="container">
+                <div class="rsvp-container" id="rsvp-container">
+                    <h2>RSVP for the Celebration</h2>
+                    
+                    <div class="form-group">
+                        <label for="rsvp-name">Full Name *</label>
+                        <input type="text" id="rsvp-name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rsvp-phone">Phone Number *</label>
+                        <input type="tel" id="rsvp-phone" required placeholder="e.g. 072 123 4567">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rsvp-email">Email Address</label>
+                        <input type="email" id="rsvp-email" placeholder="optional">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rsvp-guests">Number of Guests Attending *</label>
+                        <select id="rsvp-guests" required>
+                            <option value="" disabled selected>Select number of guests</option>
+                            <option value="1">1 person (just me)</option>
+                            <option value="2">2 people</option>
+                            <option value="3">3 people</option>
+                            <option value="4">4 people</option>
+                            <option value="5">5+ people (please specify in message)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Will you attend? *</label>
+                        <div class="rsvp-options">
+                            <div class="rsvp-option">
+                                <input type="radio" id="attend-yes" name="attendance" value="yes" required>
+                                <label for="attend-yes">Yes, I'll be there!</label>
+                            </div>
+                            <div class="rsvp-option">
+                                <input type="radio" id="attend-no" name="attendance" value="no">
+                                <label for="attend-no">Sorry, I can't make it</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rsvp-message">Message to Bohlale (Optional)</label>
+                        <textarea id="rsvp-message" placeholder="Wishing you a wonderful 21st celebration..."></textarea>
+                    </div>
+                    
+                    <button class="btn pulse" id="submit-rsvp">
+                        <i class="fas fa-paper-plane"></i> Submit RSVP
+                    </button>
+                </div>
+                
+                <!-- Confirmation Message (Hidden by default) -->
+                <div class="confirmation-message" id="confirmation-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Thank You for Your RSVP!</h3>
+                    <p>Your response has been recorded for Bohlale's 21st Birthday Celebration.</p>
+                    <p>We look forward to celebrating with you on <strong>26 December 2026</strong>!</p>
+                    <p style="margin-top: 30px; font-size: 1.1rem; color: var(--text-gray);">
+                        If you need to update your RSVP, please contact:<br>
+                        <strong>Brendah: 072 290 1011</strong> or <strong>Bohlale: 082 828 8033</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="contact-info">
+                    <h3>Contact for Questions</h3>
+                    <p><i class="fas fa-phone"></i> Brendah: 072 290 1011</p>
+                    <p><i class="fas fa-phone"></i> Bohlale: 082 828 8033</p>
+                    <p><i class="fas fa-envelope"></i> bohlale21@celebration.co.za</p>
+                </div>
+                
+                <div class="copyright">
+                    <p>© 2026 Bohlale's 21st Birthday Celebration. All rights reserved.</p>
+                    <p>An elegant black affair celebrating a special milestone.</p>
+                </div>
+            </div>
+        </footer>
+    </section>
 
     <script>
         // Invite Generator Functionality
@@ -561,50 +723,71 @@
                 return;
             }
             
-            // Encode the guest name for URL
-            const encodedName = encodeURIComponent(guestName);
+            // Create a unique ID for this guest (using timestamp + random number)
+            const guestId = Date.now() + Math.floor(Math.random() * 1000);
+            
+            // Encode the guest data for URL
+            const guestData = encodeURIComponent(JSON.stringify({
+                name: guestName,
+                id: guestId,
+                date: new Date().toISOString().split('T')[0]
+            }));
             
             // Generate the personalized link
             const baseUrl = window.location.href.split('#')[0];
-            const inviteLink = `${baseUrl}#personal-invite=${encodedName}`;
+            const inviteLink = `${baseUrl}#guest=${guestData}`;
             
             // Display the generated link
             document.getElementById('invite-link').href = inviteLink;
             document.getElementById('invite-link').textContent = inviteLink;
-            document.getElementById('generated-link').classList.add('active');
+            document.getElementById('generated-link-container').classList.add('active');
             
             // Scroll to the generated link section
-            document.getElementById('generated-link').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('generated-link-container').scrollIntoView({ behavior: 'smooth' });
         });
         
-        // Check for personalized invite in URL
-        window.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const personalInvite = window.location.hash.includes('personal-invite=');
-            
-            if (personalInvite) {
-                // Extract guest name from URL
-                const hash = window.location.hash;
-                const guestNameEncoded = hash.split('personal-invite=')[1];
+        // Copy link to clipboard
+        document.getElementById('copy-btn').addEventListener('click', function() {
+            const link = document.getElementById('invite-link').href;
+            navigator.clipboard.writeText(link).then(function() {
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i> Link Copied!';
+                this.style.backgroundColor = '#2e7d32';
                 
-                if (guestNameEncoded) {
-                    const guestName = decodeURIComponent(guestNameEncoded);
-                    
-                    // Show personalized invite section
-                    document.getElementById('personalized-invite').classList.add('active');
-                    document.getElementById('display-guest-name').textContent = guestName;
-                    document.getElementById('rsvp-name').value = guestName;
-                    
-                    // Hide other sections
-                    document.getElementById('home').style.display = 'none';
-                    document.getElementById('invite-generator').style.display = 'none';
-                    document.querySelector('.event-details').style.display = 'none';
-                    document.querySelector('.footer').style.display = 'none';
-                    
-                    // Scroll to personalized section
-                    setTimeout(() => {
-                        document.getElementById('personalized-invite').scrollIntoView({ behavior: 'smooth' });
-                    }, 500);
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-copy"></i> Copy Link to Clipboard';
+                    this.style.backgroundColor = '#333';
+                }, 2000);
+            }.bind(this));
+        });
+        
+        // Check for guest invitation in URL
+        window.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            
+            if (hash.includes('#guest=')) {
+                // Extract guest data from URL
+                const guestDataEncoded = hash.split('#guest=')[1];
+                
+                if (guestDataEncoded) {
+                    try {
+                        const guestData = JSON.parse(decodeURIComponent(guestDataEncoded));
+                        const guestName = guestData.name;
+                        
+                        // Show guest invitation page
+                        document.getElementById('main-generator').style.display = 'none';
+                        document.getElementById('guest-invitation-page').classList.add('active');
+                        
+                        // Update guest name display
+                        document.getElementById('guest-name-display').textContent = guestName;
+                        document.getElementById('rsvp-name').value = guestName;
+                        
+                        // Scroll to top of guest page
+                        window.scrollTo(0, 0);
+                    } catch (e) {
+                        console.error('Error parsing guest data:', e);
+                        // Stay on main generator page if there's an error
+                    }
                 }
             }
         });
@@ -618,38 +801,62 @@
             const attendance = document.querySelector('input[name="attendance"]:checked');
             const message = document.getElementById('rsvp-message').value.trim();
             
-            if (!name || !phone || !attendance) {
-                alert('Please fill in all required fields (Name, Phone, and Attendance).');
+            if (!name || !phone || !guests || !attendance) {
+                alert('Please fill in all required fields (Name, Phone, Number of Guests, and Attendance).');
                 return;
             }
             
+            // Hide RSVP form and show confirmation
+            document.getElementById('rsvp-container').style.display = 'none';
+            document.getElementById('confirmation-message').classList.add('active');
+            
+            // Scroll to confirmation message
+            document.getElementById('confirmation-message').scrollIntoView({ behavior: 'smooth' });
+            
             // In a real application, this would send data to a server
-            // For this demo, we'll just show a confirmation message
-            const rsvpForm = document.getElementById('rsvp-form');
-            rsvpForm.innerHTML = `
-                <div style="text-align: center; padding: 30px;">
-                    <i class="fas fa-check-circle" style="font-size: 4rem; color: #d4af37; margin-bottom: 20px;"></i>
-                    <h3 style="color: #d4af37; font-size: 2rem; margin-bottom: 20px;">RSVP Confirmed!</h3>
-                    <p style="font-size: 1.3rem; margin-bottom: 15px;">Thank you <strong>${name}</strong> for your RSVP!</p>
-                    <p style="font-size: 1.1rem;">Your response has been recorded. We look forward to celebrating with you!</p>
-                    <p style="margin-top: 30px; font-size: 1rem; color: #aaa;">Confirmation sent to: ${phone} ${email ? 'and ' + email : ''}</p>
-                    <a href="#home" class="btn" style="margin-top: 30px;">Back to Main Page</a>
-                </div>
+            // For this demo, we'll store in localStorage and log to console
+            const rsvpData = {
+                guestName: name,
+                phone: phone,
+                email: email,
+                numberOfGuests: guests,
+                attendance: attendance.value,
+                message: message,
+                timestamp: new Date().toISOString(),
+                event: "Bohlale's 21st Birthday - 26 Dec 2026"
+            };
+            
+            // Save to localStorage (for demo purposes)
+            let allRSVPs = JSON.parse(localStorage.getItem('bohlale21RSVPs') || '[]');
+            allRSVPs.push(rsvpData);
+            localStorage.setItem('bohlale21RSVPs', JSON.stringify(allRSVPs));
+            
+            console.log('RSVP Submitted:', rsvpData);
+            console.log('Total RSVPs stored:', allRSVPs.length);
+            
+            // Show a summary in the confirmation message
+            const confirmationText = `
+                <p><strong>${name}</strong>, thank you for your RSVP!</p>
+                <p>You have confirmed <strong>${attendance.value === 'yes' ? 'attendance' : 'that you cannot attend'}</strong> for <strong>${guests} ${guests === '1' ? 'person' : 'people'}</strong>.</p>
+                <p>We look forward to celebrating with you on <strong>26 December 2026</strong>!</p>
             `;
             
-            // In a real application, you would send this data to a server
-            console.log('RSVP Data:', {
-                name, phone, email, guests, 
-                attendance: attendance.value, 
-                message, 
-                timestamp: new Date().toISOString()
-            });
+            document.getElementById('confirmation-message').querySelector('p').innerHTML = confirmationText;
         });
         
         // Make the "Generate Personal Invite Link" button work on Enter key
         document.getElementById('guest-name').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 document.getElementById('generate-btn').click();
+            }
+        });
+        
+        // Pre-fill RSVP phone field if we have a phone parameter in URL
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const phoneParam = urlParams.get('phone');
+            if (phoneParam && document.getElementById('rsvp-phone')) {
+                document.getElementById('rsvp-phone').value = phoneParam;
             }
         });
     </script>
