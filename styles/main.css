@@ -1,0 +1,129 @@
+/* Main shared styles - variables, resets, common elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-black: #000000;
+    --silver: #C0C0C0;
+    --light-silver: #E8E8E8;
+    --sparkle: #F0F8FF;
+    --accent-pink: #FFC0CB;
+    --text-light: #F5F5F5;
+    --text-gray: #AAAAAA;
+}
+
+body {
+    background-color: var(--primary-black);
+    color: var(--text-light);
+    line-height: 1.7;
+    font-family: 'Raleway', sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Sparkle Background Effect */
+.sparkle-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.sparkle {
+    position: absolute;
+    background-color: var(--sparkle);
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+}
+
+/* Common button styles */
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--silver), var(--light-silver));
+    color: var(--primary-black);
+    padding: 20px 50px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(192, 192, 192, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(192, 192, 192, 0.4);
+}
+
+.btn:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+}
+
+.btn:hover:after {
+    animation: shimmer 0.8s;
+}
+
+@keyframes shimmer {
+    100% { transform: translateX(100%); }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .btn {
+        padding: 18px 30px;
+        font-size: 1.2rem;
+    }
+}

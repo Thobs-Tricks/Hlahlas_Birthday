@@ -1,0 +1,273 @@
+/* Main Generator Page (Host View) */
+.main-generator {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeIn 1s ease-out;
+    position: relative;
+}
+
+.floral-border {
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Cpath d='M50,100 Q75,50 100,100 T150,100 T200,100 T250,100' stroke='%23C0C0C0' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    opacity: 0.5;
+}
+
+.header-section h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--silver);
+    text-shadow: 0 0 10px rgba(192, 192, 192, 0.5);
+    position: relative;
+}
+
+.header-section h1 span {
+    color: var(--light-silver);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    position: relative;
+}
+
+.header-section h1 .crown {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+    color: var(--silver);
+}
+
+.header-section p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--light-silver);
+    margin-bottom: 20px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+/* Invite Generator Section */
+.invite-generator {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 50px 40px;
+    border-radius: 20px;
+    max-width: 850px;
+    margin: 0 auto;
+    border: 1px solid var(--silver);
+    box-shadow: 0 0 30px rgba(192, 192, 192, 0.2);
+    backdrop-filter: blur(10px);
+    position: relative;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.invite-generator:before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--silver), transparent, var(--silver));
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.invite-generator h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    margin-bottom: 25px;
+    color: var(--light-silver);
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.invite-generator h2:after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--silver), transparent);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.generator-instructions {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 35px;
+    color: var(--text-gray);
+    line-height: 1.9;
+    font-weight: 300;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.input-group label {
+    text-align: left;
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+    color: var(--light-silver);
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+}
+
+.input-group input {
+    padding: 20px;
+    border: 1px solid rgba(192, 192, 192, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--text-light);
+    border-radius: 10px;
+    font-size: 1.3rem;
+    transition: all 0.3s;
+    font-family: 'Raleway', sans-serif;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--silver);
+    box-shadow: 0 0 15px rgba(192, 192, 192, 0.3);
+}
+
+.input-group:before {
+    content: "✿";
+    position: absolute;
+    right: 20px;
+    top: 55px;
+    color: var(--silver);
+    font-size: 1.2rem;
+}
+
+.generated-link-container {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    border-left: 4px solid var(--silver);
+    display: none;
+    border: 1px solid rgba(192, 192, 192, 0.3);
+}
+
+.generated-link-container.active {
+    display: block;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.generated-link-container h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: var(--light-silver);
+}
+
+.link-display {
+    background-color: rgba(20, 20, 20, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    word-break: break-all;
+    font-size: 1.2rem;
+    border: 1px dashed var(--silver);
+    color: var(--light-silver);
+}
+
+.link-display a {
+    color: var(--light-silver);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.link-display a:hover {
+    color: var(--sparkle);
+    text-decoration: underline;
+}
+
+.copy-btn {
+    background: rgba(192, 192, 192, 0.2);
+    color: var(--light-silver);
+    border: 1px solid var(--silver);
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    transition: all 0.3s;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+}
+
+.copy-btn:hover {
+    background: rgba(192, 192, 192, 0.3);
+    transform: translateY(-3px);
+}
+
+.host-contact {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: rgba(192, 192, 192, 0.1);
+    border-radius: 10px;
+    border-top: 1px solid rgba(192, 192, 192, 0.2);
+}
+
+.host-contact p {
+    color: var(--light-silver);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.host-contact i {
+    color: var(--silver);
+    margin-right: 15px;
+    font-size: 1.3rem;
+    width: 25px;
+}
+
+/* Responsive for generator */
+@media (max-width: 768px) {
+    .header-section h1 {
+        font-size: 3.5rem;
+    }
+    
+    .header-section p {
+        font-size: 1.5rem;
+    }
+    
+    .invite-generator {
+        padding: 30px 20px;
+    }
+    
+    .invite-generator h2 {
+        font-size: 2.2rem;
+    }
+    
+    .input-group input {
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+}
