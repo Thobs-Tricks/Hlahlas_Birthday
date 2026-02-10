@@ -7,12 +7,73 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Setup modal functionality
     setupModal();
+    
+    // Check which page to show
+    checkAndShowCorrectPage();
 });
+
+function checkAndShowCorrectPage() {
+    const hash = window.location.hash;
+    
+    if (hash.includes('#guest=')) {
+        // Show invitation page, hide generator
+        showInvitationPage();
+    } else {
+        // Show generator page, hide invitation
+        showGeneratorPage();
+    }
+}
+
+function showInvitationPage() {
+    const mainGenerator = document.getElementById('main-generator');
+    const guestInvitationPage = document.getElementById('guest-invitation-page');
+    
+    if (mainGenerator && guestInvitationPage) {
+        mainGenerator.style.display = 'none';
+        guestInvitationPage.style.display = 'block';
+        guestInvitationPage.classList.add('active');
+        
+        // Extract guest name from URL
+        try {
+            const guestDataEncoded = window.location.hash.split('#guest=')[1];
+            if (guestDataEncoded) {
+                const guestData = JSON.parse(decodeURIComponent(guestDataEncoded));
+                const guestName = guestData.name;
+                
+                // Update guest name display
+                const guestNameDisplay = document.getElementById('guest-name-display');
+                const rsvpNameInput = document.getElementById('rsvp-name');
+                
+                if (guestNameDisplay) guestNameDisplay.textContent = guestName;
+                if (rsvpNameInput) rsvpNameInput.value = guestName;
+            }
+        } catch (e) {
+            console.error('Error parsing guest data:', e);
+        }
+        
+        // Create elegant decorations
+        createElegantDecorations();
+    }
+}
+
+function showGeneratorPage() {
+    const mainGenerator = document.getElementById('main-generator');
+    const guestInvitationPage = document.getElementById('guest-invitation-page');
+    
+    if (mainGenerator && guestInvitationPage) {
+        mainGenerator.style.display = 'flex';
+        guestInvitationPage.style.display = 'none';
+        guestInvitationPage.classList.remove('active');
+    }
+}
 
 // Create sparkle background effect
 function createSparkles() {
     const sparkleBg = document.getElementById('sparkle-bg');
     if (!sparkleBg) return;
+    
+    // Clear existing sparkles
+    sparkleBg.innerHTML = '';
     
     const sparkleCount = 50;
     
@@ -42,6 +103,12 @@ function createSparkles() {
 
 // Create elegant decorations for invitation page
 function createElegantDecorations() {
+    const container = document.getElementById('decorations-container');
+    if (!container) return;
+    
+    // Clear existing decorations
+    container.innerHTML = '';
+    
     createElegantBalloons();
     createSubtleConfetti();
     createElegantSparkles();
@@ -241,9 +308,4 @@ function hideMessageModal() {
         modal.classList.remove('active');
         document.body.style.overflow = 'auto';
     }
-}
-
-// Check if we're on generator page
-function isGeneratorPage() {
-    return window.location.hash.includes('#guest=') === false;
 }
