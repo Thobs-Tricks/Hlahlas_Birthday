@@ -883,14 +883,16 @@
             display: block;
         }
         
-    /* RSVP Tracker Styles */
+   /* RSVP Tracker Styles - IMPROVED */
         .tracker-section {
             margin-top: 60px;
             padding: 40px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.85);
             border-radius: 20px;
             border: 1px solid var(--silver);
             display: none;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(192, 192, 192, 0.1);
         }
         
         .tracker-section.active {
@@ -916,36 +918,48 @@
         
         .tracker-stats {
             display: flex;
-            gap: 30px;
+            gap: 20px;
             flex-wrap: wrap;
         }
         
         .stat-box {
             background: rgba(192, 192, 192, 0.1);
-            padding: 15px 25px;
-            border-radius: 10px;
+            padding: 15px 20px;
+            border-radius: 12px;
             border: 1px solid rgba(192, 192, 192, 0.3);
             text-align: center;
-            min-width: 150px;
+            min-width: 130px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--silver);
+            box-shadow: 0 5px 15px rgba(192, 192, 192, 0.2);
         }
         
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: var(--silver);
             display: block;
             line-height: 1;
+            text-shadow: 0 0 10px rgba(192, 192, 192, 0.5);
         }
         
         .stat-label {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--text-gray);
-            margin-top: 5px;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .rsvp-table-container {
             overflow-x: auto;
             margin-top: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(192, 192, 192, 0.2);
         }
         
         .rsvp-table {
@@ -955,108 +969,385 @@
         }
         
         .rsvp-table th {
-            background-color: rgba(192, 192, 192, 0.2);
+            background-color: rgba(192, 192, 192, 0.15);
             color: var(--light-silver);
-            padding: 18px 15px;
+            padding: 20px 15px;
             text-align: left;
             font-family: 'Playfair Display', serif;
             font-weight: 500;
             border-bottom: 2px solid var(--silver);
+            font-size: 1.1rem;
         }
         
         .rsvp-table td {
-            padding: 15px;
+            padding: 18px 15px;
             border-bottom: 1px solid rgba(192, 192, 192, 0.1);
             color: var(--text-gray);
+            font-size: 1rem;
+        }
+        
+        .rsvp-table tr {
+            transition: all 0.3s ease;
         }
         
         .rsvp-table tr:hover {
             background-color: rgba(192, 192, 192, 0.05);
+            transform: translateX(5px);
         }
         
         .attending-yes {
             color: #a5d6a7;
             font-weight: 600;
+            background: rgba(165, 214, 167, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9rem;
         }
         
         .attending-no {
             color: #ffabab;
             font-weight: 600;
+            background: rgba(255, 171, 171, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9rem;
         }
         
         .no-data {
             text-align: center;
-            padding: 40px;
+            padding: 60px 40px;
             color: var(--text-gray);
             font-size: 1.2rem;
         }
         
-        /* Balloon Decorations */
-        .balloon {
-            position: absolute;
-            width: 50px;
-            height: 60px;
-            border-radius: 50%;
-            z-index: -1;
-            opacity: 0.7;
-            animation: float 15s infinite ease-in-out;
+        .tracker-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
-        .balloon:before {
+        .tracker-btn {
+            background: rgba(192, 192, 192, 0.15);
+            color: var(--light-silver);
+            border: 1px solid var(--silver);
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 180px;
+            justify-content: center;
+        }
+        
+        .tracker-btn:hover {
+            background: rgba(192, 192, 192, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(192, 192, 192, 0.2);
+        }
+        
+        /* Elegant Silver Balloon Decorations */
+        .elegant-balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.6;
+            animation: gentle-float 25s infinite ease-in-out;
+            box-shadow: 0 5px 15px rgba(192, 192, 192, 0.3);
+        }
+        
+        .elegant-balloon:before {
             content: '';
             position: absolute;
-            width: 2px;
-            height: 60px;
-            background-color: rgba(192, 192, 192, 0.5);
-            top: 60px;
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, var(--silver), transparent);
+            top: 50px;
             left: 50%;
             transform: translateX(-50%);
         }
         
-        .balloon-1 { background: radial-gradient(circle at 30% 30%, #ffc0cb, #ff69b4); }
-        .balloon-2 { background: radial-gradient(circle at 30% 30%, #c0c0c0, #a9a9a9); }
-        .balloon-3 { background: radial-gradient(circle at 30% 30%, #ffffff, #d3d3d3); }
-        .balloon-4 { background: radial-gradient(circle at 30% 30%, #ffd700, #ffa500); }
-        .balloon-5 { background: radial-gradient(circle at 30% 30%, #e6e6fa, #d8bfd8); }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(2deg); }
-            50% { transform: translateY(-40px) rotate(-2deg); }
-            75% { transform: translateY(-20px) rotate(1deg); }
-        }
-        
-        /* Confetti Effect */
-        .confetti {
+        .elegant-balloon:after {
+            content: '';
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background-color: var(--silver);
+            border-radius: 50%;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
             opacity: 0.7;
-            z-index: -1;
-            animation: confetti-fall 5s linear infinite;
         }
         
-        @keyframes confetti-fall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        .balloon-silver { 
+            background: radial-gradient(circle at 30% 30%, #F0F0F0, #C0C0C0, #A0A0A0);
         }
         
-        /* Enhanced Sparkle Effect */
-        .enhanced-sparkle {
+        .balloon-white { 
+            background: radial-gradient(circle at 30% 30%, #FFFFFF, #E0E0E0, #C0C0C0);
+        }
+        
+        .balloon-light { 
+            background: radial-gradient(circle at 30% 30%, #F8F8F8, #D8D8D8, #B8B8B8);
+        }
+        
+        @keyframes gentle-float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.6;
+            }
+            25% { 
+                transform: translateY(-15px) rotate(1deg) scale(1.02);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-25px) rotate(-1deg) scale(1);
+                opacity: 0.6;
+            }
+            75% { 
+                transform: translateY(-15px) rotate(0.5deg) scale(0.98);
+                opacity: 0.7;
+            }
+        }
+        
+        /* Subtle Confetti Effect */
+        .subtle-confetti {
             position: absolute;
             width: 6px;
             height: 6px;
+            background-color: rgba(192, 192, 192, 0.5);
+            opacity: 0;
+            z-index: -1;
+            animation: subtle-confetti-fall 8s linear infinite;
+            border-radius: 1px;
+        }
+        
+        @keyframes subtle-confetti-fall {
+            0% { 
+                transform: translateY(-100px) rotate(0deg) translateX(0); 
+                opacity: 0;
+            }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { 
+                transform: translateY(100vh) rotate(720deg) translateX(100px); 
+                opacity: 0;
+            }
+        }
+        
+        /* Floating Number 21 Decorations */
+        .floating-number {
+            position: absolute;
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: rgba(192, 192, 192, 0.15);
+            z-index: -1;
+            animation: floating-number 20s infinite linear;
+        }
+        
+        @keyframes floating-number {
+            0% { 
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.1;
+            }
+            50% { 
+                transform: translateY(-50px) rotate(180deg) scale(1.2);
+                opacity: 0.2;
+            }
+            100% { 
+                transform: translateY(0) rotate(360deg) scale(1);
+                opacity: 0.1;
+            }
+        }
+        
+        /* Enhanced Sparkle Effect - More Elegant */
+        .elegant-sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
             background-color: var(--sparkle);
             border-radius: 50%;
             z-index: -1;
-            animation: sparkle-twinkle 3s infinite;
-            box-shadow: 0 0 10px var(--sparkle);
+            opacity: 0;
+            animation: elegant-sparkle-twinkle 4s infinite;
+            box-shadow: 0 0 8px var(--sparkle);
         }
         
-        @keyframes sparkle-twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+        @keyframes elegant-sparkle-twinkle {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0.8);
+            }
+            50% { 
+                opacity: 0.8; 
+                transform: scale(1.3);
+            }
+        }
+        
+        /* Diamond/Crystal Decorations */
+        .crystal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.3), rgba(255, 255, 255, 0.6));
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            z-index: -1;
+            opacity: 0.4;
+            animation: crystal-float 30s infinite linear;
+        }
+        
+        @keyframes crystal-float {
+            0% { 
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translateY(-40px) rotate(180deg);
+                opacity: 0.6;
+            }
+            100% { 
+                transform: translateY(0) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+        
+        /* Message bubble for RSVP messages in table */
+        .message-bubble {
+            background: rgba(192, 192, 192, 0.05);
+            border: 1px solid rgba(192, 192, 192, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            max-width: 200px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .message-bubble:hover {
+            background: rgba(192, 192, 192, 0.1);
+            border-color: rgba(192, 192, 192, 0.3);
+        }
+        
+        .message-bubble.expanded {
+            max-width: 400px;
+            background: rgba(192, 192, 192, 0.1);
+        }
+        
+        /* Modal for viewing full message */
+        .message-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .message-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .modal-content {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--silver);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(192, 192, 192, 0.3);
+        }
+        
+        .modal-header h3 {
+            color: var(--light-silver);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--silver);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--light-silver);
+        }
+        
+        .modal-body {
+            color: var(--text-gray);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        /* Responsive adjustments for tracker */
+        @media (max-width: 768px) {
+            .tracker-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .tracker-stats {
+                justify-content: center;
+            }
+            
+            .stat-box {
+                min-width: 120px;
+                padding: 12px 15px;
+            }
+            
+            .stat-number {
+                font-size: 1.8rem;
+            }
+            
+            .tracker-btn {
+                min-width: 160px;
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            
+            .rsvp-table th,
+            .rsvp-table td {
+                padding: 12px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .attending-yes,
+            .attending-no {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
         }
     </style>
 </head>
@@ -1064,8 +1355,21 @@
     <!-- Sparkle Background Effect -->
     <div class="sparkle-bg" id="sparkle-bg"></div>
     
-    <!-- Balloon Decorations -->
-    <div class="balloon-container" id="balloon-container"></div>
+    <!-- Elegant Decorations Container -->
+    <div class="decorations-container" id="decorations-container"></div>
+    
+    <!-- Message Modal -->
+    <div class="message-modal" id="message-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Guest Message</h3>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-message">
+                <!-- Message content will go here -->
+            </div>
+        </div>
+    </div>
     
     <!-- Main Generator Page (For Host) -->
     <section class="main-generator" id="main-generator">
@@ -1079,7 +1383,7 @@
                 <p>Create Personalized Silver & Black Invitations</p>
                 
                 <button class="btn" id="tracker-toggle" style="margin-top: 30px; max-width: 300px;">
-                    <i class="fas fa-chart-bar"></i> View RSVP Tracker
+                    <i class="fas fa-chart-line"></i> View RSVP Tracker Dashboard
                 </button>
             </div>
             
@@ -1128,7 +1432,7 @@
             <!-- RSVP Tracker Section -->
             <div class="tracker-section" id="tracker-section">
                 <div class="tracker-header">
-                    <h3><i class="fas fa-list-check"></i> RSVP Tracker</h3>
+                    <h3><i class="fas fa-list-check"></i> RSVP Tracker Dashboard</h3>
                     <div class="tracker-stats" id="tracker-stats">
                         <!-- Stats will be populated by JavaScript -->
                         <div class="stat-box">
@@ -1175,12 +1479,15 @@
                     </table>
                 </div>
                 
-                <div style="margin-top: 30px; text-align: center;">
-                    <button class="copy-btn" id="refresh-tracker">
+                <div class="tracker-actions">
+                    <button class="tracker-btn" id="refresh-tracker">
                         <i class="fas fa-sync-alt"></i> Refresh Data
                     </button>
-                    <button class="copy-btn" id="export-data" style="margin-left: 10px;">
+                    <button class="tracker-btn" id="export-data">
                         <i class="fas fa-download"></i> Export to CSV
+                    </button>
+                    <button class="tracker-btn" id="clear-data">
+                        <i class="fas fa-trash-alt"></i> Clear Local Data
                     </button>
                 </div>
             </div>
@@ -1191,12 +1498,7 @@
     <section class="guest-invitation-page" id="guest-invitation-page">
         <!-- Hero Section -->
         <div class="invitation-hero">
-            <!-- Add floating balloons -->
-            <div class="balloon balloon-1" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
-            <div class="balloon balloon-2" style="top: 15%; left: 85%; animation-delay: 1s;"></div>
-            <div class="balloon balloon-3" style="top: 20%; left: 20%; animation-delay: 2s;"></div>
-            <div class="balloon balloon-4" style="top: 5%; left: 70%; animation-delay: 3s;"></div>
-            <div class="balloon balloon-5" style="top: 25%; left: 50%; animation-delay: 4s;"></div>
+            <!-- Elegant silver & white balloons will be added via JavaScript -->
             
             <h1>Bohlale's <span>21st</span> Birthday</h1>
             <div class="twenty-one">21</div>
@@ -1347,8 +1649,7 @@
         // ============================================
         // FIREBASE CONFIGURATION
         // ============================================
-        // TODO: REPLACE WITH YOUR FIREBASE CONFIG
-         const firebaseConfig = {
+        const firebaseConfig = {
             apiKey: "AIzaSyC8Kd2Wr55iHGuJDgiVDLulrIzjYOwd16c",
             authDomain: "bohlale-base.firebaseapp.com",
             projectId: "bohlale-base",
@@ -1356,7 +1657,7 @@
             messagingSenderId: "367428432200",
             appId: "1:367428432200:web:4a260f5fcce2716ed2c37d",
             measurementId: "G-6YLP64XWR9"
-          };
+        };
         
         // Initialize Firebase
         let db; // Firestore database reference
@@ -1386,7 +1687,7 @@
         }
         
         // ============================================
-        // HELPER FUNCTIONS
+        // ELEGANT DECORATION FUNCTIONS
         // ============================================
         function createSparkles() {
             const sparkleBg = document.getElementById('sparkle-bg');
@@ -1418,57 +1719,64 @@
             }
         }
         
-        // Create enhanced sparkles for guest page
-        function createEnhancedSparkles() {
-            const container = document.getElementById('balloon-container') || document.body;
-            const sparkleCount = 30;
+        // Create elegant silver/white balloons
+        function createElegantBalloons() {
+            const container = document.getElementById('decorations-container') || document.body;
+            const balloonCount = 12;
             
-            for (let i = 0; i < sparkleCount; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.classList.add('enhanced-sparkle');
+            for (let i = 0; i < balloonCount; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('elegant-balloon');
+                
+                // Random balloon type (silver, white, or light)
+                const balloonTypes = ['balloon-silver', 'balloon-white', 'balloon-light'];
+                const balloonType = balloonTypes[Math.floor(Math.random() * balloonTypes.length)];
+                balloon.classList.add(balloonType);
                 
                 // Random position
-                const left = Math.random() * 100;
-                const top = Math.random() * 100;
+                const left = Math.random() * 85 + 5;
+                const top = Math.random() * 80 + 10;
                 
                 // Random size
-                const size = Math.random() * 6 + 3;
+                const size = Math.random() * 20 + 35;
                 
-                // Random animation delay
-                const delay = Math.random() * 3;
+                // Random animation
+                const duration = Math.random() * 10 + 20;
+                const delay = Math.random() * 15;
                 
-                sparkle.style.left = `${left}vw`;
-                sparkle.style.top = `${top}vh`;
-                sparkle.style.width = `${size}px`;
-                sparkle.style.height = `${size}px`;
-                sparkle.style.animationDelay = `${delay}s`;
+                balloon.style.left = `${left}%`;
+                balloon.style.top = `${top}%`;
+                balloon.style.width = `${size}px`;
+                balloon.style.height = `${size * 1.25}px`;
+                balloon.style.animationDuration = `${duration}s`;
+                balloon.style.animationDelay = `${delay}s`;
                 
-                container.appendChild(sparkle);
+                container.appendChild(balloon);
             }
         }
         
-        // Create confetti effect
-        function createConfetti() {
-            const container = document.getElementById('balloon-container') || document.body;
-            const confettiCount = 50;
+        // Create subtle confetti
+        function createSubtleConfetti() {
+            const container = document.getElementById('decorations-container') || document.body;
+            const confettiCount = 30;
             
             for (let i = 0; i < confettiCount; i++) {
                 const confetti = document.createElement('div');
-                confetti.classList.add('confetti');
+                confetti.classList.add('subtle-confetti');
                 
                 // Random position
                 const left = Math.random() * 100;
                 
-                // Random color
-                const colors = ['#C0C0C0', '#E8E8E8', '#FFFFFF', '#FFC0CB', '#FFD700'];
+                // Silver colors only
+                const colors = ['#C0C0C0', '#E8E8E8', '#FFFFFF', '#D0D0D0'];
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 
                 // Random size
-                const size = Math.random() * 8 + 4;
+                const size = Math.random() * 4 + 2;
                 
                 // Random animation
-                const duration = Math.random() * 5 + 3;
-                const delay = Math.random() * 5;
+                const duration = Math.random() * 5 + 6;
+                const delay = Math.random() * 8;
                 
                 confetti.style.left = `${left}vw`;
                 confetti.style.backgroundColor = color;
@@ -1481,41 +1789,90 @@
             }
         }
         
-        // Create floating balloons
-        function createBalloons() {
-            const container = document.getElementById('balloon-container');
-            if (!container) return;
+        // Create elegant sparkles
+        function createElegantSparkles() {
+            const container = document.getElementById('decorations-container') || document.body;
+            const sparkleCount = 25;
             
-            const balloonCount = 15;
-            
-            for (let i = 0; i < balloonCount; i++) {
-                const balloon = document.createElement('div');
-                balloon.classList.add('balloon');
-                
-                // Random balloon type
-                const balloonTypes = ['balloon-1', 'balloon-2', 'balloon-3', 'balloon-4', 'balloon-5'];
-                const balloonType = balloonTypes[Math.floor(Math.random() * balloonTypes.length)];
-                balloon.classList.add(balloonType);
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('elegant-sparkle');
                 
                 // Random position
-                const left = Math.random() * 90 + 5;
+                const left = Math.random() * 100;
                 const top = Math.random() * 100;
                 
                 // Random size
-                const size = Math.random() * 30 + 40;
+                const size = Math.random() * 5 + 2;
                 
-                // Random animation
-                const duration = Math.random() * 10 + 20;
+                // Random animation delay
+                const delay = Math.random() * 4;
+                
+                sparkle.style.left = `${left}vw`;
+                sparkle.style.top = `${top}vh`;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                sparkle.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(sparkle);
+            }
+        }
+        
+        // Create floating number 21 decorations
+        function createFloatingNumbers() {
+            const container = document.getElementById('decorations-container') || document.body;
+            const numberCount = 8;
+            
+            for (let i = 0; i < numberCount; i++) {
+                const number = document.createElement('div');
+                number.classList.add('floating-number');
+                number.textContent = '21';
+                
+                // Random position
+                const left = Math.random() * 90 + 5;
+                const top = Math.random() * 90 + 5;
+                
+                // Random animation duration
+                const duration = Math.random() * 15 + 15;
                 const delay = Math.random() * 10;
                 
-                balloon.style.left = `${left}%`;
-                balloon.style.top = `${top}%`;
-                balloon.style.width = `${size}px`;
-                balloon.style.height = `${size * 1.2}px`;
-                balloon.style.animationDuration = `${duration}s`;
-                balloon.style.animationDelay = `${delay}s`;
+                number.style.left = `${left}%`;
+                number.style.top = `${top}%`;
+                number.style.animationDuration = `${duration}s`;
+                number.style.animationDelay = `${delay}s`;
                 
-                container.appendChild(balloon);
+                container.appendChild(number);
+            }
+        }
+        
+        // Create crystal decorations
+        function createCrystals() {
+            const container = document.getElementById('decorations-container') || document.body;
+            const crystalCount = 15;
+            
+            for (let i = 0; i < crystalCount; i++) {
+                const crystal = document.createElement('div');
+                crystal.classList.add('crystal');
+                
+                // Random position
+                const left = Math.random() * 95;
+                const top = Math.random() * 95;
+                
+                // Random size
+                const size = Math.random() * 15 + 10;
+                
+                // Random animation
+                const duration = Math.random() * 20 + 20;
+                const delay = Math.random() * 15;
+                
+                crystal.style.left = `${left}%`;
+                crystal.style.top = `${top}%`;
+                crystal.style.width = `${size}px`;
+                crystal.style.height = `${size}px`;
+                crystal.style.animationDuration = `${duration}s`;
+                crystal.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(crystal);
             }
         }
         
@@ -1582,7 +1939,7 @@
         }
         
         // ============================================
-        // UPDATE RSVP TRACKER UI
+        // UPDATE RSVP TRACKER UI WITH IMPROVEMENTS
         // ============================================
         function updateTrackerUI(rsvpData, stats) {
             // Update stats
@@ -1601,6 +1958,9 @@
                         <td colspan="7" class="no-data">
                             <i class="fas fa-inbox" style="font-size: 2rem; margin-bottom: 15px; display: block; color: var(--silver);"></i>
                             <div>No RSVPs yet. Invite some guests!</div>
+                            <div style="margin-top: 10px; font-size: 1rem; color: var(--text-gray);">
+                                Create invitation links above and share them with guests.
+                            </div>
                         </td>
                     </tr>
                 `;
@@ -1615,11 +1975,25 @@
             });
             
             // Populate table
-            rsvpData.forEach((item) => {
+            rsvpData.forEach((item, index) => {
                 const row = document.createElement('tr');
                 
                 const statusClass = item.WillAttend ? 'attending-yes' : 'attending-no';
                 const statusText = item.WillAttend ? 'Attending' : 'Not Attending';
+                
+                // Create message bubble with click functionality
+                let messageCell = 'No message';
+                if (item.Message && item.Message.trim() !== '') {
+                    const shortMessage = item.Message.length > 50 ? 
+                        item.Message.substring(0, 50) + '...' : item.Message;
+                    
+                    messageCell = `
+                        <div class="message-bubble" data-index="${index}" data-full-message="${encodeURIComponent(item.Message)}">
+                            ${shortMessage}
+                            ${item.Message.length > 50 ? '<br><small style="color: var(--silver);">Click to read more</small>' : ''}
+                        </div>
+                    `;
+                }
                 
                 row.innerHTML = `
                     <td><strong>${item.Fullnames || 'No name'}</strong></td>
@@ -1628,11 +2002,37 @@
                     <td>${item.NumGuest || 1}</td>
                     <td><span class="${statusClass}">${statusText}</span></td>
                     <td>${item.formattedDate || 'Not set'}</td>
-                    <td>${item.Message ? item.Message.substring(0, 50) + (item.Message.length > 50 ? '...' : '') : 'No message'}</td>
+                    <td>${messageCell}</td>
                 `;
                 
                 tableBody.appendChild(row);
             });
+            
+            // Add click event listeners to message bubbles
+            document.querySelectorAll('.message-bubble').forEach(bubble => {
+                bubble.addEventListener('click', function() {
+                    const fullMessage = decodeURIComponent(this.getAttribute('data-full-message'));
+                    showMessageModal(fullMessage);
+                });
+            });
+        }
+        
+        // ============================================
+        // MESSAGE MODAL FUNCTIONS
+        // ============================================
+        function showMessageModal(message) {
+            const modal = document.getElementById('message-modal');
+            const modalMessage = document.getElementById('modal-message');
+            
+            modalMessage.textContent = message;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+        
+        function hideMessageModal() {
+            const modal = document.getElementById('message-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
         }
         
         // ============================================
@@ -1665,6 +2065,19 @@
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
+            
+            // Show confirmation
+            alert(`Exported ${rsvpData.length} RSVPs to CSV file`);
+        }
+        
+        // ============================================
+        // CLEAR LOCAL DATA FUNCTION
+        // ============================================
+        function clearLocalData() {
+            if (confirm('Are you sure you want to clear all locally stored RSVP data? This will not affect data in Firebase.')) {
+                localStorage.removeItem('bohlale21RSVPs');
+                alert('Local RSVP data cleared successfully!');
+            }
         }
         
         // ============================================
@@ -1709,6 +2122,16 @@
             // Initialize effects
             createSparkles();
             
+            // Setup modal close button
+            document.getElementById('close-modal').addEventListener('click', hideMessageModal);
+            
+            // Close modal when clicking outside
+            document.getElementById('message-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hideMessageModal();
+                }
+            });
+            
             // Check for guest invitation in URL
             const hash = window.location.hash;
             
@@ -1729,10 +2152,12 @@
                         document.getElementById('guest-name-display').textContent = guestName;
                         document.getElementById('rsvp-name').value = guestName;
                         
-                        // Create enhanced effects for guest page
-                        createBalloons();
-                        createEnhancedSparkles();
-                        createConfetti();
+                        // Create elegant decorations for guest page
+                        createElegantBalloons();
+                        createSubtleConfetti();
+                        createElegantSparkles();
+                        createFloatingNumbers();
+                        createCrystals();
                         
                         // Scroll to top of guest page
                         window.scrollTo(0, 0);
@@ -1751,6 +2176,7 @@
             const trackerSection = document.getElementById('tracker-section');
             const refreshButton = document.getElementById('refresh-tracker');
             const exportButton = document.getElementById('export-data');
+            const clearButton = document.getElementById('clear-data');
             
             let currentRSVPData = [];
             
@@ -1761,6 +2187,9 @@
                 if (trackerSection.classList.contains('active')) {
                     // Load data when opening tracker
                     await loadTrackerData();
+                    
+                    // Scroll to tracker
+                    trackerSection.scrollIntoView({ behavior: 'smooth' });
                 }
             });
             
@@ -1776,6 +2205,9 @@
                 exportToCSV(currentRSVPData);
             });
             
+            // Clear local data
+            clearButton.addEventListener('click', clearLocalData);
+            
             // Function to load tracker data
             async function loadTrackerData() {
                 const result = await fetchRSVPData();
@@ -1789,12 +2221,18 @@
                             <td colspan="7" class="no-data">
                                 <i class="fas fa-exclamation-triangle" style="color: #ffabab; font-size: 2rem; margin-bottom: 15px; display: block;"></i>
                                 <div>Error loading data: ${result.error}</div>
+                                <div style="margin-top: 10px; font-size: 1rem;">
+                                    Check your Firebase connection and security rules.
+                                </div>
                             </td>
                         </tr>
                     `;
                 }
             }
         }
+        
+        // Keep the rest of your existing JavaScript functions (createSparkles, etc.)
+        // and event listeners (generate-btn, copy-btn, submit-rsvp) the same as before
         
         document.getElementById('generate-btn').addEventListener('click', function() {
             const guestName = document.getElementById('guest-name').value.trim();
@@ -1907,7 +2345,7 @@
                 document.getElementById('confirmation-message').classList.add('active');
                 
                 // Create celebration effects
-                createConfetti();
+                createSubtleConfetti();
                 
                 // Update confirmation details
                 document.getElementById('confirmation-details').innerHTML = `
