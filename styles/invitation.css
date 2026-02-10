@@ -1,5 +1,8 @@
 /* Guest Invitation Page */
-
+.guest-invitation-page {
+    display: none;
+    min-height: 100vh;
+}
 
 .guest-invitation-page.active {
     display: block;
