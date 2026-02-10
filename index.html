@@ -6,6 +6,11 @@
     <title>Bohlale's 21st Birthday Celebration</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -840,6 +845,43 @@
                 display: none;
             }
         }
+        /* Add loading spinner style */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(192, 192, 192, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--silver);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Success and error message styles */
+        .alert {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .alert.success {
+            background-color: rgba(46, 125, 50, 0.2);
+            border: 1px solid #2e7d32;
+            color: #a5d6a7;
+            display: block;
+        }
+        
+        .alert.error {
+            background-color: rgba(198, 40, 40, 0.2);
+            border: 1px solid #c62828;
+            color: #ffabab;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -964,6 +1006,9 @@
                 <div class="rsvp-container" id="rsvp-container">
                     <h2>RSVP for the Celebration</h2>
                     
+                    <!-- Firebase Status Alert -->
+                    <div id="firebase-status" class="alert" style="display: none;"></div>
+                    
                     <div class="form-group">
                         <label for="rsvp-name">Full Name *</label>
                         <input type="text" id="rsvp-name" required>
@@ -1021,6 +1066,7 @@
                     <h3>Thank You for Your RSVP!</h3>
                     <p>Your response has been recorded for Bohlale's elegant 21st Birthday Celebration.</p>
                     <p>We look forward to celebrating this special milestone with you on <strong>26 December 2026</strong>!</p>
+                    <div id="confirmation-details"></div>
                     <p style="margin-top: 30px; font-size: 1.3rem; color: var(--silver);">
                         If you need to update your RSVP, please contact:<br>
                         <strong>Brendah: 072 290 1011</strong> or <strong>Bohlale: 082 828 8033</strong>
@@ -1036,19 +1082,62 @@
                     <h3>Contact for Questions</h3>
                     <p><i class="fas fa-phone"></i> Brendah: 072 290 1011</p>
                     <p><i class="fas fa-phone"></i> Bohlale: 082 828 8033</p>
-                    <p><i class="fas fa-envelope"></i> bohlale21@celebration.co.za</p>
                 </div>
                 
                 <div class="copyright">
                     <p>© 2026 Bohlale's 21st Birthday Celebration. All rights reserved.</p>
                     <p>An elegant black & silver affair celebrating a beautiful milestone.</p>
+                    <p>Designed by Shepherd Thobejane (083 643 9745)</p>
                 </div>
             </div>
         </footer>
     </section>
 
     <script>
-        // Create sparkle background effect
+        // ============================================
+        // FIREBASE CONFIGURATION
+        // ============================================
+        // TODO: REPLACE WITH YOUR FIREBASE CONFIG
+         const firebaseConfig = {
+            apiKey: "AIzaSyC8Kd2Wr55iHGuJDgiVDLulrIzjYOwd16c",
+            authDomain: "bohlale-base.firebaseapp.com",
+            projectId: "bohlale-base",
+            storageBucket: "bohlale-base.firebasestorage.app",
+            messagingSenderId: "367428432200",
+            appId: "1:367428432200:web:4a260f5fcce2716ed2c37d",
+            measurementId: "G-6YLP64XWR9"
+          };
+        
+        // Initialize Firebase
+        let db; // Firestore database reference
+        
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            console.log("Firebase initialized successfully!");
+            
+            // Update status indicator
+            const statusElement = document.getElementById('firebase-status');
+            if (statusElement) {
+                statusElement.textContent = "✓ Connected to database";
+                statusElement.className = "alert success";
+                statusElement.style.display = "block";
+            }
+        } catch (error) {
+            console.error("Firebase initialization error:", error);
+            
+            // Show error message if element exists
+            const statusElement = document.getElementById('firebase-status');
+            if (statusElement) {
+                statusElement.textContent = "⚠ Database connection failed. RSVP will be saved locally.";
+                statusElement.className = "alert error";
+                statusElement.style.display = "block";
+            }
+        }
+        
+        // ============================================
+        // HELPER FUNCTIONS
+        // ============================================
         function createSparkles() {
             const sparkleBg = document.getElementById('sparkle-bg');
             const sparkleCount = 50;
@@ -1077,7 +1166,45 @@
             }
         }
         
-        // Invite Generator Functionality
+        // ============================================
+        // SAVE RSVP TO FIREBASE
+        // ============================================
+        async function saveRSVPToFirebase(rsvpData) {
+            if (!db) {
+                console.warn("Firebase not initialized, saving to localStorage only");
+                return { success: false, error: "Database not connected" };
+            }
+            
+            try {
+                // Format the data to match your Firestore structure
+                const firestoreData = {
+                    DataSubmitted: firebase.firestore.FieldValue.serverTimestamp(),
+                    Email: rsvpData.email || "",
+                    Fullnames: rsvpData.guestName,
+                    Message: rsvpData.message || "",
+                    NumGuest: parseInt(rsvpData.numberOfGuests) || 1,
+                    PhoneNumber: rsvpData.phone,
+                    WillAttend: rsvpData.attendance === "yes"
+                };
+                
+                console.log("Saving to Firestore:", firestoreData);
+                
+                // Save to Firestore in "Birthday RSVP" collection
+                // Auto-generate document ID
+                const docRef = await db.collection("Birthday RSVP").add(firestoreData);
+                
+                console.log("RSVP saved with ID: ", docRef.id);
+                return { success: true, docId: docRef.id };
+                
+            } catch (error) {
+                console.error("Error saving to Firestore:", error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
         document.getElementById('generate-btn').addEventListener('click', function() {
             const guestName = document.getElementById('guest-name').value.trim();
             
@@ -1109,7 +1236,6 @@
             document.getElementById('generated-link-container').scrollIntoView({ behavior: 'smooth' });
         });
         
-        // Copy link to clipboard
         document.getElementById('copy-btn').addEventListener('click', function() {
             const link = document.getElementById('invite-link').href;
             navigator.clipboard.writeText(link).then(function() {
@@ -1163,7 +1289,7 @@
         });
         
         // RSVP Form Submission
-        document.getElementById('submit-rsvp').addEventListener('click', function() {
+        document.getElementById('submit-rsvp').addEventListener('click', async function() {
             const name = document.getElementById('rsvp-name').value.trim();
             const phone = document.getElementById('rsvp-phone').value.trim();
             const email = document.getElementById('rsvp-email').value.trim();
@@ -1171,48 +1297,95 @@
             const attendance = document.querySelector('input[name="attendance"]:checked');
             const message = document.getElementById('rsvp-message').value.trim();
             
+            // Validation
             if (!name || !phone || !guests || !attendance) {
                 alert('Please fill in all required fields (Name, Phone, Number of Guests, and Attendance).');
                 return;
             }
             
+            // Phone number validation (basic)
+            const phoneRegex = /^[0-9\s\+\-\(\)]{10,}$/;
+            if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
+                alert('Please enter a valid phone number (at least 10 digits).');
+                return;
+            }
+            
+            // Email validation (if provided)
+            if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert('Please enter a valid email address or leave it empty.');
+                return;
+            }
+            
             // Add a nice submission effect
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            const originalText = this.innerHTML;
+            this.innerHTML = '<span class="spinner"></span> Saving to database...';
             this.disabled = true;
             
-            setTimeout(() => {
+            // Prepare RSVP data
+            const rsvpData = {
+                guestName: name,
+                phone: phone,
+                email: email,
+                numberOfGuests: guests,
+                attendance: attendance.value,
+                message: message,
+                timestamp: new Date().toISOString(),
+                event: "Bohlale's 21st Birthday - 26 Dec 2026"
+            };
+            
+            // Save to Firebase
+            const firebaseResult = await saveRSVPToFirebase(rsvpData);
+            
+            // Also save to localStorage as backup
+            let allRSVPs = JSON.parse(localStorage.getItem('bohlale21RSVPs') || '[]');
+            allRSVPs.push(rsvpData);
+            localStorage.setItem('bohlale21RSVPs', JSON.stringify(allRSVPs));
+            
+            // Reset button
+            this.innerHTML = originalText;
+            this.disabled = false;
+            
+            // Show appropriate message
+            if (firebaseResult.success) {
                 // Hide RSVP form and show confirmation
                 document.getElementById('rsvp-container').style.display = 'none';
                 document.getElementById('confirmation-message').classList.add('active');
                 
-                // Reset button
-                this.innerHTML = '<i class="fas fa-paper-plane"></i> Send My RSVP';
-                this.disabled = false;
+                // Update confirmation details
+                document.getElementById('confirmation-details').innerHTML = `
+                    <p><strong>Confirmation Details:</strong></p>
+                    <p>Name: ${name}</p>
+                    <p>Phone: ${phone}</p>
+                    <p>Guests: ${guests} ${guests === '1' ? 'person' : 'people'}</p>
+                    <p>Attendance: ${attendance.value === 'yes' ? 'Confirmed' : 'Cannot attend'}</p>
+                    <p>Saved to database: ✓</p>
+                `;
                 
                 // Scroll to confirmation message
                 document.getElementById('confirmation-message').scrollIntoView({ behavior: 'smooth' });
                 
-                // In a real application, this would send data to a server
-                // For this demo, we'll store in localStorage and log to console
-                const rsvpData = {
-                    guestName: name,
-                    phone: phone,
-                    email: email,
-                    numberOfGuests: guests,
-                    attendance: attendance.value,
-                    message: message,
-                    timestamp: new Date().toISOString(),
-                    event: "Bohlale's 21st Birthday - 26 Dec 2026"
-                };
+                console.log('RSVP saved successfully to Firebase!');
+            } else {
+                // Show warning but still proceed
+                alert('Your RSVP was saved locally, but there was an issue connecting to the database. Please contact the hosts directly to confirm.');
                 
-                // Save to localStorage (for demo purposes)
-                let allRSVPs = JSON.parse(localStorage.getItem('bohlale21RSVPs') || '[]');
-                allRSVPs.push(rsvpData);
-                localStorage.setItem('bohlale21RSVPs', JSON.stringify(allRSVPs));
+                // Hide RSVP form and show confirmation anyway
+                document.getElementById('rsvp-container').style.display = 'none';
+                document.getElementById('confirmation-message').classList.add('active');
                 
-                console.log('RSVP Submitted:', rsvpData);
-                console.log('Total RSVPs stored:', allRSVPs.length);
-            }, 1000);
+                // Update confirmation details with warning
+                document.getElementById('confirmation-details').innerHTML = `
+                    <p><strong>Confirmation Details:</strong></p>
+                    <p>Name: ${name}</p>
+                    <p>Phone: ${phone}</p>
+                    <p>Guests: ${guests} ${guests === '1' ? 'person' : 'people'}</p>
+                    <p>Attendance: ${attendance.value === 'yes' ? 'Confirmed' : 'Cannot attend'}</p>
+                    <p style="color: #ffabab;">⚠ Please contact hosts directly to confirm your attendance</p>
+                `;
+                
+                // Scroll to confirmation message
+                document.getElementById('confirmation-message').scrollIntoView({ behavior: 'smooth' });
+            }
         });
         
         // Make the "Generate Personal Invite Link" button work on Enter key
